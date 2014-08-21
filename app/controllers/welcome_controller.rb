@@ -1,7 +1,7 @@
 class WelcomeController < ApplicationController
   def index
     if user_signed_in?
-      redirect_to controller: 'todo', action: 'index'
+      redirect_to todos_path
     end
   end
 end

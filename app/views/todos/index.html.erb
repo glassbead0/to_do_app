@@ -8,7 +8,7 @@
 <% if @todos.length>0 %>
   <ul class="list-group container">
     <% @todos.each do |todo| %>
-      <li class="list-group-item list-group-item-info">
+      <li class="list-group-item list-group-item-info col-sm-7">
         <%= link_to todo_path(todo), method: :put do %>
           <button type="button" class="btn btn-default btn-lg">
             <span class="glyphicon glyphicon-ok"></span>
@@ -36,7 +36,7 @@
 <% end %>
 <ul class="list-group container">
   <% @dones.each do |done| %>
-    <li class="list-group-item list-group-item-success">
+    <li class="list-group-item list-group-item-success col-sm-7">
       <%= link_to todo_path(done), method: :delete do %>
         <button type="button" class="btn btn-default btn-lg">
           <span class="glyphicon glyphicon-remove"></span>
