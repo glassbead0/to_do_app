@@ -6,6 +6,7 @@ class TodosController < ApplicationController
   def index
     @todos = Todo.where(done: false)
     @dones = Todo.where(done: true)
+    @todo = Todo.new
   end
 
   # GET /todos/1
@@ -29,7 +30,7 @@ class TodosController < ApplicationController
 
     respond_to do |format|
       if @todo.save
-        format.html { redirect_to @todo, notice: 'Todo was successfully created.' }
+        format.html { redirect_to todos_path }
         format.json { render :show, status: :created, location: @todo }
       else
         format.html { render :new }
@@ -42,8 +43,8 @@ class TodosController < ApplicationController
   # PATCH/PUT /todos/1.json
   def update
     respond_to do |format|
-      if @todo.update(todo_params)
-        format.html { redirect_to @todo, notice: 'Todo was successfully updated.' }
+      if @todo.update_attribute(:done, true)
+        format.html { redirect_to todos_path }
         format.json { render :show, status: :ok, location: @todo }
       else
         format.html { render :edit }
@@ -57,7 +58,7 @@ class TodosController < ApplicationController
   def destroy
     @todo.destroy
     respond_to do |format|
-      format.html { redirect_to todos_url, notice: 'Todo was successfully destroyed.' }
+      format.html { redirect_to todos_url }
       format.json { head :no_content }
     end
   end
