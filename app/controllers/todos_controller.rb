@@ -1,11 +1,12 @@
 class TodosController < ApplicationController
+  before_action :set_user
   before_action :set_todo, only: [:show, :edit, :update, :destroy]
-
+  before_action :authenticate_user!
   # GET /todos
   # GET /todos.json
   def index
-    @todos = Todo.where(done: false)
-    @dones = Todo.where(done: true)
+    @todos = @user.todos.where(done: false)
+    @dones = @user.todos.where(done: true)
     @todo = Todo.new
   end
 
@@ -16,7 +17,7 @@ class TodosController < ApplicationController
 
   # GET /todos/new
   def new
-    @todo = Todo.new
+    @todo = @user.todos.new
   end
 
   # GET /todos/1/edit
@@ -26,7 +27,7 @@ class TodosController < ApplicationController
   # POST /todos
   # POST /todos.json
   def create
-    @todo = Todo.new(todo_params)
+    @todo = @user.todos.create(todo_params)
 
     respond_to do |format|
       if @todo.save
@@ -42,6 +43,7 @@ class TodosController < ApplicationController
   # PATCH/PUT /todos/1
   # PATCH/PUT /todos/1.json
   def update
+    @todo = @user.todos.find(params[:id])
     respond_to do |format|
       if @todo.update_attribute(:done, true)
         format.html { redirect_to todos_path }
@@ -66,7 +68,11 @@ class TodosController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_todo
-      @todo = Todo.find(params[:id])
+      @todo = @user.todos.find(params[:id])
+    end
+
+    def set_user
+      @user = current_user
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
