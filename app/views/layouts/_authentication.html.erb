@@ -1,7 +1,14 @@
-<% if user_signed_in? %>
-  <li><%= link_to "Signed in as #{current_user.email}", edit_user_registration_path %> </li>
-  <li><%= link_to 'Signout', destroy_user_session_path, method: :delete %></li>
-<% else %>
-  <li><%= link_to 'Signup', new_user_registration_path %></li>
-  <li><%= link_to 'Login', new_user_session_path %></li>
-<% end %>
+<ul class="nav navbar-nav navbar-right">
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Account<%# current_user.email  %> <span class="caret"></span></a>
+    <ul class="dropdown-menu" role="menu">
+      <% if user_signed_in? %>
+        <li><%= link_to "#{current_user.email}", edit_user_registration_path %> </li>
+        <li><%= link_to 'Log out', destroy_user_session_path, method: :delete %></li>
+      <% else %>
+        <li><%= link_to 'Signup', new_user_registration_path %></li>
+        <li><%= link_to 'Login', new_user_session_path %></li>
+        <% end %>
+    </ul>
+  </li>
+</ul>

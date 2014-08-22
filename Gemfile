@@ -5,7 +5,7 @@ gem 'rspec-rails'
 gem 'factory_girl_rails'
 gem 'guard-bundler'
 gem 'ruby_gntp'
-
+gem 'cancan'
 group :test do
   gem 'capybara'
   gem 'shoulda-matchers'
