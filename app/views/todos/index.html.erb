@@ -6,6 +6,8 @@
 <%= render 'form' %>
 
 <% if @todos.length>0 %>
+  <span class="label label-info"><span class="badge alert-info"><%= @todos.length %></span>Todos</span>
+
   <ul class="list-group container">
     <% @todos.each do |todo| %>
       <li class="list-group-item list-group-item-info col-sm-7">
@@ -21,9 +23,9 @@
   </ul>
 <% else %>
   <div class="row container">
-    <div class="list-group col-sm-3">
+    <div class="list-group col-sm-4">
       <div class="list-group-item list-group-item-warning">
-        You have no ToDo items. Stop procrastinating! Add one now!
+        You have no ToDo items. Add one now!
       </div>
     </div>
   </div>
@@ -32,7 +34,10 @@
 
 
 <% if @dones.length > 0 %>
-  <span class="label label-success">Done!</span>
+  <span class="label label-success"><span class="badge alert-success"><%= @dones.length %></span>Done</span>
+  <%= link_to dones_path, method: :delete do %>
+    <span class="label label-danger">Delete All</span>
+  <% end %>
 <% end %>
 <ul class="list-group container">
   <% @dones.each do |done| %>
@@ -46,4 +51,5 @@
       <%= done.name %>
     </li>
   <% end %>
+
 </ul>

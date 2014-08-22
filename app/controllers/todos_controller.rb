@@ -65,6 +65,12 @@ class TodosController < ApplicationController
     end
   end
 
+  def destroy_dones
+    @dones = @user.todos.where(done: true)
+    @dones.destroy_all
+    redirect_to todos_path
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_todo

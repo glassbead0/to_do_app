@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :todos
   devise_for :users
 
+  delete 'dones' => 'todos#destroy_dones'
   get 'users' => 'users#todo_list'
 
 
