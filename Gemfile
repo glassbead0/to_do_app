@@ -6,9 +6,16 @@ gem 'factory_girl_rails'
 gem 'guard-bundler'
 gem 'ruby_gntp'
 gem 'cancan'
-group :test do
-  gem 'capybara'
-  gem 'shoulda-matchers'
+gem 'capybara'
+gem 'shoulda-matchers'
+
+group :development, :test do
+  gem 'sqlite3'
+end
+
+group :production do
+  gem 'pg'
+  gem 'rails_12factor'
 end
 
 gem 'bootstrap-generators'
@@ -21,8 +28,7 @@ gem 'bcrypt'
 gem 'devise'
 gem 'faker'
 
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
