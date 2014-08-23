@@ -7,8 +7,17 @@
 
 <% if @todos.length>0 %>
   <span class="label label-info"><span class="badge alert-info"><%= @todos.length %></span>Todos</span>
+  <% if current_user.admin %>
 
-  <ul class="list-group container">
+    <!-- FIX THE LINE BELOW SO IT MARKS ALL ITEMS AS DONE! -->
+    <%= link_to dones_path, method: :put do %>
+
+
+      <span class="label label-success">Mark All Done</span>
+    <% end %>
+  <% end %>
+
+    <ul class="list-group container">
     <% @todos.each do |todo| %>
       <li class="list-group-item list-group-item-info col-sm-7">
         <%= link_to mark_done_path(todo), method: :put do %>
@@ -19,7 +28,7 @@
 
         <%= todo.name %>
         <% if current_user.admin %>
-        <%= link_to 'Edit', edit_todo_path(todo) %>
+            <%= link_to 'edit', edit_todo_path(todo), class: 'label label-warning' %>
           <% end %>
       </li>
     <% end %>
