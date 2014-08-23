@@ -5,6 +5,12 @@ class ApplicationController < ActionController::Base
 
   before_action :configure_permitted_parameteres, if: :devise_controller?
 
+  # the set_search made the search bar not throw errors when on a page other than your todo list
+  before_filter :set_search
+
+  def set_search
+    @q = Todo.search(params[:q])
+  end
 
   protected
 
