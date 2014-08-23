@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :todo do
-    name { Faker::Hacker.verb }
+    name { Faker::Hacker.verb + ' ' + Faker::Hacker.noun}
     done false
   end
 end
