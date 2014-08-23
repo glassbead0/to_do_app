@@ -10,7 +10,7 @@
   <% if current_user.admin %>
 
     <!-- FIX THE LINE BELOW SO IT MARKS ALL ITEMS AS DONE! -->
-    <%= link_to dones_path, method: :put do %>
+    <%= link_to mark_dones_path do %>
 
 
       <span class="label label-success">Mark All Done</span>
