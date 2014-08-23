@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+ruby '2.1.2'
 gem 'guard-rspec'
 gem 'rspec-rails'
 gem 'factory_girl_rails'
