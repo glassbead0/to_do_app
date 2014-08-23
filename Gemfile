@@ -9,6 +9,7 @@ gem 'ruby_gntp'
 gem 'cancan'
 gem 'capybara'
 gem 'shoulda-matchers'
+gem 'ransack', github: 'activerecord-hackery/ransack', branch: 'rails-4.1'
 
 group :development, :test do
   gem 'sqlite3'
