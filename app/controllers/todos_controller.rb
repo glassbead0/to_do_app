@@ -40,12 +40,13 @@ class TodosController < ApplicationController
     end
   end
 
+
   # PATCH/PUT /todos/1
   # PATCH/PUT /todos/1.json
   def update
     @todo = @user.todos.find(params[:id])
     respond_to do |format|
-      if @todo.update_attribute(:done, true)
+      if @todo.update(todo_params)
         format.html { redirect_to todos_path }
         format.json { render :show, status: :ok, location: @todo }
       else

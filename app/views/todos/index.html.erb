@@ -11,13 +11,16 @@
   <ul class="list-group container">
     <% @todos.each do |todo| %>
       <li class="list-group-item list-group-item-info col-sm-7">
-        <%= link_to todo_path(todo), method: :put do %>
+        <%= link_to mark_done_path(todo), method: :put do %>
           <button type="button" class="btn btn-default btn-lg">
             <span class="glyphicon glyphicon-ok"></span>
           </button>
         <% end %>
 
         <%= todo.name %>
+        <% if current_user.admin %>
+        <%= link_to 'Edit', edit_todo_path(todo) %>
+          <% end %>
       </li>
     <% end %>
   </ul>
