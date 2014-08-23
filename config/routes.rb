@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root 'welcome#index'
   resources :todos
-  devise_for :users
+  devise_for :users, path_names: { sign_in: 'login', sign_out: 'logout' }
 
   delete 'dones' => 'todos#destroy_dones'
   get 'users' => 'users#todo_list'

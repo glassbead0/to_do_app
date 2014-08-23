@@ -1,8 +1,12 @@
 <div class="jumbotron">
-<h1 align="center">Welcome to TuDu!</h1>
-<h4 align="center">Your personalized to do app</h4>
+  <h1 align="center">Welcome to TuDu!</h1>
+  <h4 align="center">Your personalized to do app</h4>
 
   <div align="center">
     <%= link_to 'Get Started', new_user_registration_path, class: 'btn btn-success btn-lg' %>
+  </div>
+  <div align="center">-or-</div>
+  <div align="center">
+    <%= link_to 'Log in', new_user_session_path, class: 'btn btn-default btn-sm' %>
   </div>
 </div>
