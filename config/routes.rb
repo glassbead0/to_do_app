@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   delete 'dones' => 'todos#destroy_dones'
   get 'users' => 'users#todo_list'
 
+  resources :mark_dones
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
