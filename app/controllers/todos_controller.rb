@@ -5,9 +5,16 @@ class TodosController < ApplicationController
   # GET /todos
   # GET /todos.json
   def index
-    @todos = @user.todos.where(done: false)
-    @dones = @user.todos.where(done: true)
+    # @todos = @user.todos.where(done: false)
+    # @dones = @user.todos.where(done: true)
     @todo = Todo.new
+
+    @q = @user.todos.search(params[:q])
+    @todos = @q.result.where(done: false)   # load all matching records
+    @dones = @q.result.where(done: true)
+
+    # @todos = @search.relation # Retrieve the relation, to lazy-load in view
+    # @todos = @search.paginate(:page => params[:page]) # Who doesn't love will_paginate?
   end
 
   # GET /todos/1
