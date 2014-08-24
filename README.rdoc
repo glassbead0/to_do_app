@@ -1,28 +1,20 @@
-== README
+TuDu is a simple yet powerful todo app built on rails
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+tu-du-app.herokuapp.com
 
-Things you may want to cover:
+Your personalized list comes loaded with the following functionality:
 
-* Ruby version
+* searchable todo items
+* add item instantly on your home page
+* progress bar to see how many of your tasks youve completed.
+* mark yourself as an admin in your profile page to allow:
+  * editing items
+  * marking all items as done at once
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* future features (in progress)
+  * multiple users can see one list and work collaboratively
+  * multiple project pages (each project page has its own todo list)
+  * login with google/facebook
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+
