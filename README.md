@@ -2,7 +2,7 @@
 
 ### Tudu is a simple yet powerful todo app built on rails
 
-[Visit TuDu](tu-du-app.herokuapp.com)
+[Visit TuDu](http://tu-du-app.herokuapp.com)
 
 Your personalized list comes loaded with the following functionality: | .
 --- | ---
