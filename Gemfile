@@ -28,6 +28,7 @@ gem 'table_print'
 gem 'rails', '4.1.4'
 gem 'bcrypt'
 gem 'devise'
+gem 'omniauth-facebook'
 gem 'faker'
 
 

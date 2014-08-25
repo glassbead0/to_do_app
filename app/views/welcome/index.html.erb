@@ -1,3 +1,14 @@
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=1466579210261122&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
 <div class="jumbotron">
   <h1 align="center">Welcome to TuDu!</h1>
   <h4 align="center">Your personalized to do app</h4>
@@ -9,4 +20,11 @@
   <div align="center">
     <%= link_to 'Log in', new_user_session_path, class: 'btn btn-default btn-sm' %>
   </div>
+  <div align="center">-or-</div>
+  <div align="center">
+    <%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook), class: 'btn btn-facebook' %>
+  </div>
+
+  <div class="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="false" data-auto-logout-link="false"></div>
+
 </div>
