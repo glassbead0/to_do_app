@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
   root 'welcome#index'
-  resources :todos
-  devise_for :users, path_names: { sign_in: 'login', sign_out: 'logout' }, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }, omniauth_providers: [:facebook]
+  devise_for :users, path_names: { sign_in: 'login', sign_out: 'logout' }, controllers: { omniauth_callbacks: 'users/omniauth_callbacks', registrations: 'users/registrations' }, omniauth_providers: [:facebook]
 
   delete 'dones' => 'todos#destroy_dones'
   get 'users' => 'users#todo_list'
 
+  resources :todos
   resources :mark_dones
 
   # The priority is based upon order of creation: first created -> highest priority.
