@@ -14,7 +14,7 @@
   </div>
 <% end -%>
 
-<!-- havent set up email recovery yet -->
+
 <%# if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
   <!--<div class="form-group">-->
     <!--<div class="col-sm-offset-2 col-sm-10">-->
@@ -39,8 +39,10 @@
   </div>
 <% end -%>
 
-<%- if devise_mapping.omniauthable? %>
-  <%- resource_class.omniauth_providers.each do |provider| %>
-    <%= link_to "Sign in with #{provider.to_s.titleize}", omniauth_authorize_path(resource_name, provider) %><br />
-  <% end -%>
-<% end -%>
+<%# if devise_mapping.omniauthable? %>
+  <%# resource_class.omniauth_providers.each do |provider| %>
+    <!--<div align="center">-->
+      <%# link_to "Sign in with #{provider.to_s.titleize}", omniauth_authorize_path(resource_name, provider), class: 'btn btn-facebook' %><br />
+    <!--</div>-->
+  <%# end -%>
+<%# end -%>

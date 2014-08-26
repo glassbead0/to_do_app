@@ -13,6 +13,7 @@ gem 'ransack', github: 'activerecord-hackery/ransack', branch: 'rails-4.1'
 
 group :development, :test do
   gem 'sqlite3'
+  gem 'byebug'
 end
 
 group :production do
