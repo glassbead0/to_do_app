@@ -71,3 +71,20 @@
   </div>
 
 <% end %>
+
+<br/>
+<% if current_user.provider == 'facebook' %>
+  <div class="row">
+    <div class="alert alert-info col-sm-6 col-sm-offset-2">
+      Your TuDu account is linked to the <%= "#{current_user.provider} account for #{current_user.first_name} #{current_user.last_name}" %>.
+    </div>
+  </div>
+<% else %>
+  <div class="row">
+    <div class="alert alert-warning col-sm-6 col-sm-offset-2">
+      We are currently working on allowing existing user to connect to their facebook account.
+      If you're determined to connect your facebook account now, you can cancel your current account,
+      and start over by signing in with Facebook. Sorry for this inconvenience.
+    </div>
+  </div>
+<% end %>
