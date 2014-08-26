@@ -13,6 +13,7 @@ gem 'ransack', github: 'activerecord-hackery/ransack', branch: 'rails-4.1'
 
 group :development, :test do
   gem 'sqlite3'
+  gem 'byebug'
 end
 
 group :production do
@@ -28,6 +29,7 @@ gem 'table_print'
 gem 'rails', '4.1.4'
 gem 'bcrypt'
 gem 'devise'
+gem 'omniauth-facebook'
 gem 'faker'
 
 
