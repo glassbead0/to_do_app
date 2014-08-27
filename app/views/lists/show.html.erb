@@ -1,7 +1,10 @@
 <div class="page-header">
+  <h3>Your Lists</h3>
   <ul class="nav nav-tabs" role="tablist">
     <%= content_tag_for(:tr, current_user.lists) do |list| %>
-      <li><%= link_to "#{list.name}", list %></li>
+      <% @active = '' %>
+      <% @active = 'active' if list == current_user.lists.find(params[:id]) %>
+      <li class="<%= @active %>"><%= link_to "#{list.name}", list %></li>
     <% end %>
     <li>  <%= link_to new_list_path, :class => 'btn' do %>
         <span class="glyphicon glyphicon-plus"></span>
