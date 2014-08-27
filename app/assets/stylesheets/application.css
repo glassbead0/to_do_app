@@ -18,4 +18,9 @@
 html, body{
   margin:0px;
   padding:0px;
+  background-color: #f1fcfa;
+}
+
+.todo_font {
+  font-size: large;
 }

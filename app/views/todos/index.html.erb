@@ -29,7 +29,7 @@
             <span class="glyphicon glyphicon-ok"></span>
           </button>
         <% end %>
-        <%= link_to edit_todo_path(todo) do %>
+        <%= link_to edit_todo_path(todo), class: 'todo_font' do %>
           <%= todo.name %>
         <% end %>
 
@@ -63,9 +63,10 @@
           <span class="glyphicon glyphicon-remove"></span>
         </button>
       <% end %>
+      <span class="todo_font"><%= done.name %></span>
       <%= link_to unmark_done_path(done), method: :put do %>
-        <%= done.name %>
-        <% end %>
+        <span class="glyphicon glyphicon-arrow-up" style="float: right; font-size: 1.6em; color: #8bb6c4"></span>
+      <% end %>
     </li>
   <% end %>
 

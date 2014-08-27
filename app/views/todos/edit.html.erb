@@ -7,13 +7,13 @@
     <span class="glyphicon glyphicon-info-sign"></span>
     Show
   <% end %>
-  <h1>Editing todo</h1>
+  <h1>Update todo</h1>
 </div>
 
 <%= form_for(@todo, method: :put, :html => { :class => "form-horizontal" }) do |f| %>
 
   <div class="row">
-    <div class="col-sm-4">
+    <div class="col-sm-6">
       <%= f.text_field :name, :class => "form-control", autofocus: true, placeholder: 'New Item' %>
       <%= f.hidden_field :done, value: false, :class => "form-control" %>
     </div>
