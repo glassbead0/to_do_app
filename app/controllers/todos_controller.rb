@@ -66,10 +66,10 @@ class TodosController < ApplicationController
   # PATCH/PUT /todos/1
   # PATCH/PUT /todos/1.json
   def update
-    @todo = @user.todos.find(params[:id])
+    @todo = @list.todos.find(params[:id])
     respond_to do |format|
       if @todo.update(todo_params)
-        format.html { redirect_to todos_path }
+        format.html { redirect_to @list }
         format.json { render :show, status: :ok, location: @todo }
       else
         format.html { render :edit }
@@ -83,7 +83,7 @@ class TodosController < ApplicationController
   def destroy
     @todo.destroy
     respond_to do |format|
-      format.html { redirect_to todos_url }
+      format.html { redirect_to list_path(@list) }
       format.json { head :no_content }
     end
   end
@@ -91,7 +91,7 @@ class TodosController < ApplicationController
   def destroy_dones
     @dones = @user.todos.where(done: true)
     @dones.destroy_all
-    redirect_to todos_path
+    redirect_to list_path(@list)
   end
 
   private
