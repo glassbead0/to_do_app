@@ -1,7 +1,7 @@
 class ListsController < ApplicationController
-  before_action :set_list, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
   before_action :set_user
+  before_action :set_list, only: [:show, :edit, :update, :destroy, :add_todo]
 
   # GET /lists
   # GET /lists.json
@@ -14,10 +14,12 @@ class ListsController < ApplicationController
   def show
     @todo = @list.todos.new
 
-    @q = @list.todos.search(params[:q])
-    @todos = @q.result.where(done: false)   # load all matching records
-    @dones = @q.result.where(done: true)
+    # @q = @list.todos.search(params[:q])
+    # @todos = @q.result.where(done: false)   # load all matching records
+    # @dones = @q.result.where(done: true)
 
+    @todos = @list.todos.where(done: false)
+    @dones = @list.todos.where(done: true)
 
     if @dones.length + @todos.length != 0
       @percentage = 100 * @dones.length / (@dones.length + @todos.length)
@@ -81,12 +83,12 @@ class ListsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_list
-      @list = List.find(params[:id])
-    end
+  def set_user
+    @user = current_user
+  end
 
-    def set_user
-      @user = current_user
+    def set_list
+      @list = @user.lists.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

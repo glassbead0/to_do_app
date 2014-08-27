@@ -1,27 +1,31 @@
 class TodosController < ApplicationController
   before_action :set_user
+  before_action :set_list
   before_action :set_todo, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
   # GET /todos
   # GET /todos.json
+
+
+ # I SHOUDL BE ALB E TO DELETE INDEX
   def index
     # @todos = @user.todos.where(done: false)
     # @dones = @user.todos.where(done: true)
-    @todo = Todo.new
-
-    @q = @user.todos.search(params[:q])
-    @todos = @q.result.where(done: false)   # load all matching records
-    @dones = @q.result.where(done: true)
-
-
-    if @dones.length + @todos.length != 0
-      @percentage = 100 * @dones.length / (@dones.length + @todos.length)
-    else
-      @percentage = 0
-    end
-
-    @status = 'progress-bar progress-bar-success progress-bar-striped active' if @percentage == 100
-    @status = 'progress-bar progress-bar-info progress-bar-striped active' if @percentage < 100
+    # @todo = Todo.new
+    #
+    # @q = @user.todos.search(params[:q])
+    # @todos = @q.result.where(done: false)   # load all matching records
+    # @dones = @q.result.where(done: true)
+    #
+    #
+    # if @dones.length + @todos.length != 0
+    #   @percentage = 100 * @dones.length / (@dones.length + @todos.length)
+    # else
+    #   @percentage = 0
+    # end
+    #
+    # @status = 'progress-bar progress-bar-success progress-bar-striped active' if @percentage == 100
+    # @status = 'progress-bar progress-bar-info progress-bar-striped active' if @percentage < 100
 
     # @todos = @search.relation # Retrieve the relation, to lazy-load in view
     # @todos = @search.paginate(:page => params[:page]) # Who doesn't love will_paginate?
@@ -34,7 +38,7 @@ class TodosController < ApplicationController
 
   # GET /todos/new
   def new
-    @todo = @user.todos.new
+    @todo = @list.todos.new
   end
 
   # GET /todos/1/edit
@@ -44,12 +48,13 @@ class TodosController < ApplicationController
   # POST /todos
   # POST /todos.json
   def create
-    @todo = @user.todos.create(todo_params)
+
+    @todo = @list.todos.create(todo_params)
 
     respond_to do |format|
       if @todo.save
-        format.html { redirect_to todos_path }
-        format.json { render :show, status: :created, location: @todo }
+        format.html { redirect_to list_path(@list) }
+        format.json { render :show, status: :created, location: @list }
       else
         format.html { render :new }
         format.json { render json: @todo.errors, status: :unprocessable_entity }
@@ -91,13 +96,17 @@ class TodosController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_todo
-      @todo = @user.todos.find(params[:id])
-    end
-
     def set_user
       @user = current_user
     end
+
+  def set_list
+    @list = @user.lists.find(params[:id])
+  end
+
+  def set_todo
+    @todo = @list.todos.find(params[:id])
+  end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def todo_params
