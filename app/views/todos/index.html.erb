@@ -15,11 +15,11 @@
 
 <% if @todos.length>0 %>
   <span class="label label-info"><span class="badge alert-info"><%= @todos.length %></span>Todos</span>
-  <% if current_user.admin %>
-    <%= link_to mark_dones_path do %>
-      <span class="label label-success">Mark All Done</span>
-    <% end %>
+
+  <%= link_to mark_all_done_path, method: :put do %>
+    <span class="label label-success">Mark All Done</span>
   <% end %>
+
 
     <ul class="list-group container">
     <% @todos.each do |todo| %>
@@ -29,11 +29,11 @@
             <span class="glyphicon glyphicon-ok"></span>
           </button>
         <% end %>
+        <%= link_to edit_todo_path(todo), class: 'todo_font' do %>
+          <%= todo.name %>
+        <% end %>
 
-        <%= todo.name %>
-        <% if current_user.admin %>
-            <%= link_to 'edit', edit_todo_path(todo), class: 'label label-warning' %>
-          <% end %>
+
       </li>
     <% end %>
   </ul>
@@ -63,8 +63,10 @@
           <span class="glyphicon glyphicon-remove"></span>
         </button>
       <% end %>
-
-      <%= done.name %>
+      <span class="todo_font"><%= done.name %></span>
+      <%= link_to unmark_done_path(done), method: :put do %>
+        <span class="glyphicon glyphicon-arrow-up" style="float: right; font-size: 1.6em; color: #8bb6c4"></span>
+      <% end %>
     </li>
   <% end %>
 
