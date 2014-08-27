@@ -1,6 +1,6 @@
 class ListsController < ApplicationController
-  before_action :authenticate_user!
   before_action :set_user
+  before_action :authenticate_user!
   before_action :set_list, only: [:show, :edit, :update, :destroy, :add_todo]
 
   # GET /lists
