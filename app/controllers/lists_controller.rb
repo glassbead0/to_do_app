@@ -11,7 +11,22 @@ class ListsController < ApplicationController
   # GET /lists/1
   # GET /lists/1.json
   def show
-    
+    @todo = @list.todos.new
+
+    @q = @list.todos.search(params[:q])
+    @todos = @q.result.where(done: false)   # load all matching records
+    @dones = @q.result.where(done: true)
+
+
+    if @dones.length + @todos.length != 0
+      @percentage = 100 * @dones.length / (@dones.length + @todos.length)
+    else
+      @percentage = 0
+    end
+
+    @status = 'progress-bar progress-bar-success progress-bar-striped active' if @percentage == 100
+    @status = 'progress-bar progress-bar-info progress-bar-striped active' if @percentage < 100
+
   end
 
   # GET /lists/new
