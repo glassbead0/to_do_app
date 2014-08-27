@@ -1,0 +1,20 @@
+<div class="page-header">
+  <%= link_to lists_path, :class => 'btn btn-default' do %>
+    <span class="glyphicon glyphicon-list-alt"></span>
+    Back
+  <% end %>
+  <%= link_to edit_list_path(@list), :class => 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-pencil"></span>
+    Edit
+  <% end %>
+  <h1>Show list</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt>Name:</dt>
+  <dd><%= @list.name %></dd>
+
+  <dt>User:</dt>
+  <dd><%= @list.user_id %></dd>
+
+</dl>

@@ -1,10 +1,12 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable
+  before_create :create_default_list
+
   devise :database_authenticatable, :registerable, :omniauthable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :todos, dependent: :destroy
+  has_many :lists, dependent: :destroy
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
@@ -25,5 +27,12 @@ class User < ActiveRecord::Base
         user.last_name = data['last_name']
       end
     end
+  end
+
+  private
+
+  def create_default_list
+    @list = List.create(name: 'Default')
+    current_user.lists << @list
   end
 end
