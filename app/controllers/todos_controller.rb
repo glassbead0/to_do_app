@@ -101,7 +101,7 @@ class TodosController < ApplicationController
     end
 
   def set_list
-    @list = @user.lists.find(params[:id])
+    @list = @user.lists.find(params[:list_id])
   end
 
   def set_todo

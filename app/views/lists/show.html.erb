@@ -3,7 +3,7 @@
   <ul class="nav nav-tabs" role="tablist">
     <%= content_tag_for(:tr, current_user.lists) do |list| %>
       <% @active = '' %>
-      <% @active = 'active' if list == current_user.lists.find(params[:id]) %>
+      <% @active = 'active' if list == @list %>
       <li class="<%= @active %>"><%= link_to "#{list.name}", list %></li>
     <% end %>
     <li>  <%= link_to new_list_path, :class => 'btn' do %>
@@ -44,10 +44,10 @@
             <span class="glyphicon glyphicon-ok" style="font-size: 1.4em"></span>
           </button>
         <% end %>
-        <%= link_to edit_todo_path(todo), class: 'todo_font' do %>
+        <%= link_to edit_list_todo_path(@list, todo), class: 'todo_font' do %>
           <%= todo.name %>
         <% end %>
-        <%= link_to todo_path(todo), method: :delete do %>
+        <%= link_to list_todo_path(@list, todo), method: :delete do %>
           <span class="glyphicon glyphicon-remove-sign right_button"></span>
         <% end %>
 
@@ -76,7 +76,7 @@
 <ul class="list-group container">
   <% @dones.each do |done| %>
     <li class="list-group-item list-group-item-success col-sm-7">
-      <%= link_to todo_path(done), method: :delete do %>
+      <%= link_to list_todo_path(@list, done), method: :delete do %>
         <button type="button" class="btn btn-primary btn-lg">
           <span class="glyphicon glyphicon-remove" style="font-size: 1.4em"></span>
         </button>

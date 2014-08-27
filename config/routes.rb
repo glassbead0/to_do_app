@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :lists
+  resources :lists do
+    resources :todos
+  end
 
   root 'welcome#index'
   devise_for :users, path_names: { sign_in: 'login', sign_out: 'logout' }, controllers: { omniauth_callbacks: 'users/omniauth_callbacks', registrations: 'users/registrations' }, omniauth_providers: [:facebook]
@@ -7,7 +9,6 @@ Rails.application.routes.draw do
   delete 'dones' => 'todos#destroy_dones'
   get 'users' => 'users#todo_list'
 
-  resources :todos
 
   put 'mark_done/:id' => 'mark_dones#mark_done', :as => 'mark_done'
   put 'mark_all_done' => 'mark_dones#mark_all_done'
