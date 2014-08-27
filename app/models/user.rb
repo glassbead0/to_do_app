@@ -33,6 +33,6 @@ class User < ActiveRecord::Base
 
   def create_default_list
     @list = List.create(name: 'Default')
-    current_user.lists << @list
+    self.lists << @list
   end
 end
