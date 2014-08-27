@@ -52,12 +52,16 @@
 
     <div class="form-group">
       <div class="col-sm-offset-2 col-sm-10">
-        <%= f.submit "Sign up", class: 'btn btn-success' %>
+        <%= f.submit "Sign up", class: 'btn btn-success' %>&nbsp;-or-
+        <%= link_to user_omniauth_authorize_path(:facebook), class: 'btn btn-social btn-facebook' do %>
+          <i class="fa fa-facebook"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sign in with Facebook
+        <% end %>
       </div>
     </div>
 
 
   <%= render "users/shared/links" %>
+
 
   <% end %>
 
