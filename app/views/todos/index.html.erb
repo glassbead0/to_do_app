@@ -14,10 +14,10 @@
 <%= render 'form' %>
 
 <% if @todos.length>0 %>
-  <span class="label label-info"><span class="badge alert-info"><%= @todos.length %></span>Todos</span>
+  <span class="badge alert-info"><%= pluralize(@todos.length, 'Todo') %></span>
 
   <%= link_to mark_all_done_path, method: :put do %>
-    <span class="label label-success">Mark All Done</span>
+    <span class="label label-success todo_label">Mark All Done</span>
   <% end %>
 
 
@@ -25,12 +25,15 @@
     <% @todos.each do |todo| %>
       <li class="list-group-item list-group-item-info col-sm-7">
         <%= link_to mark_done_path(todo), method: :put do %>
-          <button type="button" class="btn btn-default btn-lg">
-            <span class="glyphicon glyphicon-ok"></span>
+          <button type="button" class="btn btn-primary btn-lg">
+            <span class="glyphicon glyphicon-ok" style="font-size: 1.4em"></span>
           </button>
         <% end %>
         <%= link_to edit_todo_path(todo), class: 'todo_font' do %>
           <%= todo.name %>
+        <% end %>
+        <%= link_to todo_path(todo), method: :delete do %>
+          <span class="glyphicon glyphicon-remove-sign right_button"></span>
         <% end %>
 
 
@@ -50,22 +53,22 @@
 
 
 <% if @dones.length > 0 %>
-  <span class="label label-success"><span class="badge alert-success"><%= @dones.length %></span>Done</span>
+  <span class="badge alert-success"><%= "#{@dones.length} Done" %></span>
   <%= link_to dones_path, method: :delete do %>
-    <span class="label label-danger">Delete All</span>
+    <span class="label label-warning todo_label">Delete All</span>
   <% end %>
 <% end %>
 <ul class="list-group container">
   <% @dones.each do |done| %>
     <li class="list-group-item list-group-item-success col-sm-7">
       <%= link_to todo_path(done), method: :delete do %>
-        <button type="button" class="btn btn-default btn-lg">
-          <span class="glyphicon glyphicon-remove"></span>
+        <button type="button" class="btn btn-primary btn-lg">
+          <span class="glyphicon glyphicon-remove" style="font-size: 1.4em"></span>
         </button>
       <% end %>
       <span class="todo_font"><%= done.name %></span>
       <%= link_to unmark_done_path(done), method: :put do %>
-        <span class="glyphicon glyphicon-arrow-up" style="float: right; font-size: 1.6em; color: #8bb6c4"></span>
+        <span class="glyphicon glyphicon-circle-arrow-up right_button"></span>
       <% end %>
     </li>
   <% end %>

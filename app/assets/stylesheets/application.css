@@ -25,3 +25,14 @@ html, body{
 .todo_font {
   font-size: large;
 }
+
+.right_button {
+  top: 17px;
+  float: right;
+  font-size: 1.6em;
+  color: #8bb6c4
+}
+
+.todo_label {
+  opacity: 0.7
+}
