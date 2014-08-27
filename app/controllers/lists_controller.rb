@@ -1,11 +1,12 @@
 class ListsController < ApplicationController
   before_action :set_list, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
+  before_action :set_user
 
   # GET /lists
   # GET /lists.json
   def index
-    @lists = List.all
+    @lists = @user.lists
   end
 
   # GET /lists/1
@@ -31,7 +32,7 @@ class ListsController < ApplicationController
 
   # GET /lists/new
   def new
-    @list = List.new
+    @list = @user.lists.new
   end
 
   # GET /lists/1/edit
@@ -41,7 +42,7 @@ class ListsController < ApplicationController
   # POST /lists
   # POST /lists.json
   def create
-    @list = List.new(list_params)
+    @list = @user.lists.new(list_params)
 
     respond_to do |format|
       if @list.save
@@ -82,6 +83,10 @@ class ListsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_list
       @list = List.find(params[:id])
+    end
+
+    def set_user
+      @user = current_user
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
