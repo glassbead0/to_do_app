@@ -1,7 +1,7 @@
 class TodosController < ApplicationController
   before_action :set_user
   before_action :set_list
-  before_action :set_todo, only: [:show, :edit, :update, :destroy]
+  before_action :set_todo, only: [:show, :edit, :update, :destroy, :mark_done, :unmark_done]
   before_action :authenticate_user!
   # GET /todos
   # GET /todos.json
@@ -66,7 +66,7 @@ class TodosController < ApplicationController
   # PATCH/PUT /todos/1
   # PATCH/PUT /todos/1.json
   def update
-    @todo = @list.todos.find(params[:id])
+
     respond_to do |format|
       if @todo.update(todo_params)
         format.html { redirect_to @list }
@@ -92,6 +92,47 @@ class TodosController < ApplicationController
     @dones = @user.todos.where(done: true)
     @dones.destroy_all
     redirect_to list_path(@list)
+  end
+
+
+  def mark_done
+    respond_to do |format|
+      if @todo.update_attribute(:done, true)
+        format.html { redirect_to @list }
+        format.json { render :show, status: :ok, location: @todo }
+      else
+        format.html { render :edit }
+        format.json { render json: @todo.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def mark_all_done
+    @todos = @list.todos
+    respond_to do |format|
+
+      @todos.each do |todo|
+        todo.update_attribute(:done, true)
+      end
+      format.html { redirect_to @list }
+      format.json { render :show, status: :ok, location: @todo }
+      # else
+      #   format.html { render :edit }
+      #   format.json { render json: @todo.errors, status: :unprocessable_entity }
+      # end
+    end
+  end
+
+  def unmark_done
+    respond_to do |format|
+      if @todo.update_attribute(:done, false)
+        format.html { redirect_to @list }
+        format.json { render :show, status: :ok, location: @todo }
+      else
+        format.html { render :edit }
+        format.json { render json: @todo.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   private

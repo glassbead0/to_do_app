@@ -1,5 +1,4 @@
 <div class="page-header">
-  <h3>Your Lists</h3>
   <ul class="nav nav-tabs" role="tablist">
     <%= content_tag_for(:tr, current_user.lists) do |list| %>
       <% @active = '' %>
@@ -31,7 +30,7 @@
 <% if @todos.length>0 %>
   <span class="badge alert-info"><%= pluralize(@todos.length, 'Todo') %></span>
 
-  <%= link_to mark_all_done_path, method: :put do %>
+  <%= link_to list_mark_all_done_path(@list), method: :put do %>
     <span class="label label-success todo_label">Mark All Done</span>
   <% end %>
 
@@ -39,7 +38,7 @@
   <ul class="list-group container">
     <% @todos.each do |todo| %>
       <li class="list-group-item list-group-item-info col-sm-7">
-        <%= link_to mark_done_path(todo), method: :put do %>
+        <%= link_to list_mark_done_path(@list, todo), method: :put do %>
           <button type="button" class="btn btn-primary btn-lg">
             <span class="glyphicon glyphicon-ok" style="font-size: 1.4em"></span>
           </button>
@@ -82,7 +81,7 @@
         </button>
       <% end %>
       <span class="todo_font"><%= done.name %></span>
-      <%= link_to unmark_done_path(done), method: :put do %>
+      <%= link_to list_unmark_done_path(@list, done), method: :put do %>
         <span class="glyphicon glyphicon-circle-arrow-up right_button"></span>
       <% end %>
     </li>
