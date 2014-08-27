@@ -55,7 +55,7 @@
 
   <div class="row">
     <div class="col-sm-2">
-      <%= link_to "Back", todos_path, class: 'btn btn-primary' %>
+      <%= link_to "Back", list_path(@user.lists.find_by(name: 'Default')), class: 'btn btn-primary' %>
     </div>
 
     <div class="col-sm-2">
