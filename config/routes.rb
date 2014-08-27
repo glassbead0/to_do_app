@@ -6,7 +6,10 @@ Rails.application.routes.draw do
   get 'users' => 'users#todo_list'
 
   resources :todos
-  resources :mark_dones
+
+  put 'mark_done/:id' => 'mark_dones#mark_done', :as => 'mark_done'
+  put 'mark_all_done' => 'mark_dones#mark_all_done'
+  put 'unmark_done:id' => 'mark_dones#unmark_done', as: 'unmark_done'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
