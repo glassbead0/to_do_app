@@ -1,0 +1,18 @@
+<%= form_for(@todo, method: :put, :html => { :class => "form-horizontal" }) do |f| %>
+
+  <div class="row">
+    <div class="col-sm-4">
+      <%= f.text_field :name, :class => "form-control", autofocus: true, placeholder: 'New Item' %>
+      <%= f.hidden_field :done, value: false, :class => "form-control" %>
+    </div>
+
+    <div class="col-sm-2">
+      <%= button_tag(type: 'submit', class: "btn btn-primary") do %>
+        <span class="glyphicon glyphicon-plus-sign"></span> Update
+      <% end %>
+    </div>
+  </div>
+
+<% end %>
+
+
