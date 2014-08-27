@@ -68,7 +68,7 @@
 
 <% if @dones.length > 0 %>
   <span class="badge alert-success"><%= "#{@dones.length} Done" %></span>
-  <%= link_to dones_path, method: :delete do %>
+  <%= link_to list_dones_path(@list), method: :delete do %>
     <span class="label label-warning todo_label">Delete All</span>
   <% end %>
 <% end %>

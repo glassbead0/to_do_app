@@ -6,31 +6,6 @@ class TodosController < ApplicationController
   # GET /todos
   # GET /todos.json
 
-
- # I SHOUDL BE ALB E TO DELETE INDEX
-  def index
-    # @todos = @user.todos.where(done: false)
-    # @dones = @user.todos.where(done: true)
-    # @todo = Todo.new
-    #
-    # @q = @user.todos.search(params[:q])
-    # @todos = @q.result.where(done: false)   # load all matching records
-    # @dones = @q.result.where(done: true)
-    #
-    #
-    # if @dones.length + @todos.length != 0
-    #   @percentage = 100 * @dones.length / (@dones.length + @todos.length)
-    # else
-    #   @percentage = 0
-    # end
-    #
-    # @status = 'progress-bar progress-bar-success progress-bar-striped active' if @percentage == 100
-    # @status = 'progress-bar progress-bar-info progress-bar-striped active' if @percentage < 100
-
-    # @todos = @search.relation # Retrieve the relation, to lazy-load in view
-    # @todos = @search.paginate(:page => params[:page]) # Who doesn't love will_paginate?
-  end
-
   # GET /todos/1
   # GET /todos/1.json
   def show
@@ -89,9 +64,9 @@ class TodosController < ApplicationController
   end
 
   def destroy_dones
-    @dones = @user.todos.where(done: true)
+    @dones = @list.todos.where(done: true)
     @dones.destroy_all
-    redirect_to list_path(@list)
+    redirect_to @list
   end
 
 

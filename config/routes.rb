@@ -4,12 +4,12 @@ Rails.application.routes.draw do
     put 'mark_done/:id' => 'todos#mark_done', :as => 'mark_done'
     put 'mark_all_done' => 'todos#mark_all_done'
     put 'unmark_done:id' => 'todos#unmark_done', as: 'unmark_done'
+    delete 'dones' => 'todos#destroy_dones'
   end
 
   root 'welcome#index'
   devise_for :users, path_names: { sign_in: 'login', sign_out: 'logout' }, controllers: { omniauth_callbacks: 'users/omniauth_callbacks', registrations: 'users/registrations' }, omniauth_providers: [:facebook]
 
-  delete 'dones' => 'todos#destroy_dones'
   get 'users' => 'users#todo_list'
 
   # The priority is based upon order of creation: first created -> highest priority.
