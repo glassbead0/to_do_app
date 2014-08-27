@@ -10,7 +10,7 @@ gem 'cancan'
 gem 'capybara'
 gem 'shoulda-matchers'
 gem 'ransack', github: 'activerecord-hackery/ransack', branch: 'rails-4.1'
-
+gem 'font-awesome-rails'
 group :development, :test do
   gem 'sqlite3'
   gem 'byebug'
