@@ -8,6 +8,13 @@ class TodosController < ApplicationController
 
   # GET /todos/1
   # GET /todos/1.json
+
+  def index
+    @q = @user.todos.search(params[:q])
+    @todos = @q.result.where(done: false).order(:list_id)   # load all matching records
+    @dones = @q.result.where(done: true).order(:list_id)
+  end
+
   def show
   end
 

@@ -1,0 +1,54 @@
+<div class="page-header row">
+
+  <h1 class="col-sm-4">Search Results</h1>
+  <h3 class="col-sm-offset-7">Belongs to list:</h3>
+</div>
+<h4><%= (@todos.length + @dones.length) %> hits</h4>
+
+<div class="list-group">
+  <% @todos.each do |todo| %>
+    <div class="row">
+      <li class="list-group-item list-group-item-info col-sm-7 col-xs-3">
+        <%= link_to list_mark_done_path(@list, todo), method: :put do %>
+          <button type="button" class="btn btn-primary btn-lg">
+            <span class="glyphicon glyphicon-ok" style="font-size: 1.4em"></span>
+          </button>
+        <% end %>
+        <%= link_to edit_list_todo_path(@list, todo), class: 'todo_font' do %>
+          <%= todo.name %>
+        <% end %>
+
+
+        <%= link_to list_todo_path(@list, todo), method: :delete do %>
+          <span class="glyphicon glyphicon-remove-sign right_button"></span>
+        <% end %>
+      </li>
+      <%= link_to todo.list, class: "list-group-item list-group-item-info col-sm-2 col-xs-3 list_identifier" do %>
+         <span class="glyphicon glyphicon-th-list" style="font-size: 1.4em"> <%= todo.list.name %></span>
+       <% end %>
+    </div>
+
+<% end %>
+</div>
+
+
+<div class="list-group">
+  <% @dones.each do |done| %>
+    <div class="row">
+      <li class="list-group-item list-group-item-success col-sm-7">
+        <%= link_to list_todo_path(@list, done), method: :delete do %>
+          <button type="button" class="btn btn-primary btn-lg">
+            <span class="glyphicon glyphicon-remove" style="font-size: 1.4em"></span>
+          </button>
+        <% end %>
+        <span class="todo_font"><%= done.name %></span>
+        <%= link_to list_unmark_done_path(@list, done), method: :put do %>
+          <span class="glyphicon glyphicon-circle-arrow-up right_button"></span>
+        <% end %>
+      </li>
+      <%= link_to done.list, class: "list-group-item list-group-item-success col-sm-2 list_identifier" do %>
+        <span class="glyphicon glyphicon-th-list" style="font-size: 1.5em"> <%= done.list.name %></span>
+      <% end %>
+    </div>
+  <% end %>
+</div>

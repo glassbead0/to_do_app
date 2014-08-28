@@ -13,13 +13,13 @@ class ListsController < ApplicationController
   # GET /lists/1.json
   def show
     @todo = @list.todos.new
-# byebug
-    @q = @list.todos.search(params[:q])
-    @todos = @q.result.where(done: false, list_id: @list.id)   # load all matching records
-    @dones = @q.result.where(done: true, list_id: @list.id)
+    # byebug
+    # @q = @list.todos.search(params[:q])
+    # @todos = @q.result.where(done: false, list_id: @list.id)   # load all matching records
+    # @dones = @q.result.where(done: true, list_id: @list.id)
 
-    # @todos = @list.todos.where(done: false)
-    # @dones = @list.todos.where(done: true)
+    @todos = @list.todos.where(done: false)
+    @dones = @list.todos.where(done: true)
 
     if @dones.length + @todos.length != 0
       @percentage = 100 * @dones.length / (@dones.length + @todos.length)
@@ -35,6 +35,7 @@ class ListsController < ApplicationController
   # GET /lists/new
   def new
     @list = @user.lists.new
+    @search_bar = true   # this will prevent search bar from showing on this page (confusing I know). it will throw error otherwise
   end
 
   # GET /lists/1/edit
@@ -44,7 +45,7 @@ class ListsController < ApplicationController
   # POST /lists
   # POST /lists.json
   def create
-    @list = @user.lists.new(list_params)
+    @list = @user.lists.create(list_params)
 
     respond_to do |format|
       if @list.save

@@ -1,0 +1,19 @@
+<ul class="list-group container">
+  <% @todos.each do |todo| %>
+    <li class="list-group-item list-group-item-info col-sm-7">
+      <%= link_to list_mark_done_path(@list, todo), method: :put do %>
+        <button type="button" class="btn btn-primary btn-lg">
+          <span class="glyphicon glyphicon-ok" style="font-size: 1.4em"></span>
+        </button>
+      <% end %>
+      <%= link_to edit_list_todo_path(@list, todo), class: 'todo_font' do %>
+        <%= todo.name %>
+      <% end %>
+      <%= link_to list_todo_path(@list, todo), method: :delete do %>
+        <span class="glyphicon glyphicon-remove-sign right_button"></span>
+      <% end %>
+
+
+    </li>
+  <% end %>
+</ul>

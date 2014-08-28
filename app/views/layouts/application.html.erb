@@ -15,6 +15,7 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <%= favicon_link_tag 'favicon.ico' %>
 </head>
 <body>
 
@@ -28,7 +29,7 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
-      <%# render 'layouts/search_bar' %>
+      <%= render 'layouts/search_bar' %>
 
       <%= render 'layouts/authentication' %>
 

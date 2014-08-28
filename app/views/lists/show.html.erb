@@ -13,7 +13,6 @@
   </ul>
 </div>
 
-
 <% if @percentage == 100 %>
   <p>Congrats, you're done!</p>
 <% end %>
@@ -24,7 +23,6 @@
   </div>
 </div>
 
-
 <%= render 'todos/form' %>
 
 <% if @todos.length>0 %>
@@ -34,26 +32,8 @@
     <span class="label label-success todo_label">Mark All Done</span>
   <% end %>
 
+  <%= render 'todos/todos' %>
 
-  <ul class="list-group container">
-    <% @todos.each do |todo| %>
-      <li class="list-group-item list-group-item-info col-sm-7">
-        <%= link_to list_mark_done_path(@list, todo), method: :put do %>
-          <button type="button" class="btn btn-primary btn-lg">
-            <span class="glyphicon glyphicon-ok" style="font-size: 1.4em"></span>
-          </button>
-        <% end %>
-        <%= link_to edit_list_todo_path(@list, todo), class: 'todo_font' do %>
-          <%= todo.name %>
-        <% end %>
-        <%= link_to list_todo_path(@list, todo), method: :delete do %>
-          <span class="glyphicon glyphicon-remove-sign right_button"></span>
-        <% end %>
-
-
-      </li>
-    <% end %>
-  </ul>
 <% else %>
   <div class="row container">
     <div class="list-group col-sm-4">
@@ -64,31 +44,14 @@
   </div>
 <% end %>
 
-
-
 <% if @dones.length > 0 %>
   <span class="badge alert-success"><%= "#{@dones.length} Done" %></span>
   <%= link_to list_dones_path(@list), method: :delete do %>
     <span class="label label-warning todo_label">Delete All</span>
   <% end %>
 <% end %>
-<ul class="list-group container">
-  <% @dones.each do |done| %>
-    <li class="list-group-item list-group-item-success col-sm-7">
-      <%= link_to list_todo_path(@list, done), method: :delete do %>
-        <button type="button" class="btn btn-primary btn-lg">
-          <span class="glyphicon glyphicon-remove" style="font-size: 1.4em"></span>
-        </button>
-      <% end %>
-      <span class="todo_font"><%= done.name %></span>
-      <%= link_to list_unmark_done_path(@list, done), method: :put do %>
-        <span class="glyphicon glyphicon-circle-arrow-up right_button"></span>
-      <% end %>
-    </li>
-  <% end %>
 
-</ul>
-
+<%= render 'todos/dones' %>
 
 <% unless @list.name == 'Default' %>
 
@@ -99,7 +62,6 @@
     </button>
   <% end %>
 
-
   <%= link_to list_path(@list), method: :delete, data:
       { confirm: "This will delete all the todo items in your #{@list.name} list.
 Are you sure you want to delete this list?" }  do %>
@@ -108,5 +70,4 @@ Are you sure you want to delete this list?" }  do %>
       Delete List
     </button>
   <% end %>
-
 <% end %>
