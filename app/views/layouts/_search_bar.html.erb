@@ -4,7 +4,7 @@
       <%= link_to 'My Todo Lists', lists_path %>
     </li>
   </ul>
-  <%= search_form_for @q, class: 'navbar-form navbar-left', role: 'search' do |f| %>
+  <%= search_form_for @q, url: list_todos_path(@list), class: 'navbar-form navbar-left', role: 'search' do |f| %>
     <div class="form-group">
       <%= f.search_field :name_cont, type: 'text', class: 'form-control', placeholder: 'Search my todos' %>
     </div>
