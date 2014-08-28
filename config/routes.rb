@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     resources :todos
     put 'mark_done/:id' => 'todos#mark_done', :as => 'mark_done'
     put 'mark_all_done' => 'todos#mark_all_done'
-    put 'unmark_done:id' => 'todos#unmark_done', as: 'unmark_done'
+    put 'unmark_done/:id' => 'todos#unmark_done', as: 'unmark_done'
     delete 'dones' => 'todos#destroy_dones'
   end
 
