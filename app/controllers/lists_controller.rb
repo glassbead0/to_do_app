@@ -35,6 +35,7 @@ class ListsController < ApplicationController
   # GET /lists/new
   def new
     @list = @user.lists.new
+    @search_bar = true   # this will prevent search bar from showing on this page (confusing I know). it will throw error otherwise
   end
 
   # GET /lists/1/edit
@@ -44,7 +45,7 @@ class ListsController < ApplicationController
   # POST /lists
   # POST /lists.json
   def create
-    @list = @user.lists.new(list_params)
+    @list = @user.lists.create(list_params)
 
     respond_to do |format|
       if @list.save

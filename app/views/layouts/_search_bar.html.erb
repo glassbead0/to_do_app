@@ -1,4 +1,4 @@
-<% if current_user && @list %>
+<% if current_user && @list && !@search_bar %>
   <ul class="nav navbar-nav">
     <li>
       <%= link_to 'My Todo Lists', lists_path %>

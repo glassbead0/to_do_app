@@ -11,8 +11,8 @@ class TodosController < ApplicationController
 
   def index
     @q = @user.todos.search(params[:q])
-    @todos = @q.result.where(done: false)   # load all matching records
-    @dones = @q.result.where(done: true)
+    @todos = @q.result.where(done: false).order(:list_id)   # load all matching records
+    @dones = @q.result.where(done: true).order(:list_id)
   end
 
   def show

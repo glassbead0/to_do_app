@@ -41,3 +41,8 @@ html, body{
 .belongs_to_list {
   padding-right: 100px;
 }
+
+.list_identifier {
+  left: 2px;
+  top: 18px
+}
