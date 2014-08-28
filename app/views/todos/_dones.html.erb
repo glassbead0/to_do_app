@@ -1,0 +1,16 @@
+<ul class="list-group container">
+  <% @dones.each do |done| %>
+    <li class="list-group-item list-group-item-success col-sm-7">
+      <%= link_to list_todo_path(@list, done), method: :delete do %>
+        <button type="button" class="btn btn-primary btn-lg">
+          <span class="glyphicon glyphicon-remove" style="font-size: 1.4em"></span>
+        </button>
+      <% end %>
+      <span class="todo_font"><%= done.name %></span>
+      <%= link_to list_unmark_done_path(@list, done), method: :put do %>
+        <span class="glyphicon glyphicon-circle-arrow-up right_button"></span>
+      <% end %>
+    </li>
+  <% end %>
+
+</ul>

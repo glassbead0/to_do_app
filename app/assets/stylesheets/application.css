@@ -37,3 +37,7 @@ html, body{
 .todo_label {
   opacity: 0.7
 }
+
+.belongs_to_list {
+  padding-right: 100px;
+}

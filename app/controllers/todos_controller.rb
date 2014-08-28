@@ -10,9 +10,9 @@ class TodosController < ApplicationController
   # GET /todos/1.json
 
   def index
-    @q = @list.todos.search(params[:q])
-    @todos = @q.result.where(done: false, list_id: @list.id)   # load all matching records
-    @dones = @q.result.where(done: true, list_id: @list.id)
+    @q = @user.todos.search(params[:q])
+    @todos = @q.result.where(done: false,)   # load all matching records
+    @dones = @q.result.where(done: true,)
   end
 
   def show
