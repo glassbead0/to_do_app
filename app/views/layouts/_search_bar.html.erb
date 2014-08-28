@@ -1,12 +1,14 @@
-<% if current_user %>
+<% if current_user && @list %>
   <ul class="nav navbar-nav">
-    <li><a href="/todos">My Todo list</a></li>
+    <li>
+      <%= link_to 'My Todo Lists', lists_path %>
+    </li>
   </ul>
   <%= search_form_for @q, class: 'navbar-form navbar-left', role: 'search' do |f| %>
     <div class="form-group">
       <%= f.search_field :name_cont, type: 'text', class: 'form-control', placeholder: 'Search my todos' %>
     </div>
     <%= f.submit 'Go', class: 'btn btn-warning' %>
-    <%= link_to 'Show All', todos_path, class: 'btn btn-warning' %>
+    <%= link_to 'Show All', @list, class: 'btn btn-warning' %>
   <% end %>
 <% end %>
