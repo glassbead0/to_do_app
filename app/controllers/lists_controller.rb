@@ -13,13 +13,13 @@ class ListsController < ApplicationController
   # GET /lists/1.json
   def show
     @todo = @list.todos.new
-# byebug
-    @q = @list.todos.search(params[:q])
-    @todos = @q.result.where(done: false, list_id: @list.id)   # load all matching records
-    @dones = @q.result.where(done: true, list_id: @list.id)
+    # byebug
+    # @q = @list.todos.search(params[:q])
+    # @todos = @q.result.where(done: false, list_id: @list.id)   # load all matching records
+    # @dones = @q.result.where(done: true, list_id: @list.id)
 
-    # @todos = @list.todos.where(done: false)
-    # @dones = @list.todos.where(done: true)
+    @todos = @list.todos.where(done: false)
+    @dones = @list.todos.where(done: true)
 
     if @dones.length + @todos.length != 0
       @percentage = 100 * @dones.length / (@dones.length + @todos.length)
