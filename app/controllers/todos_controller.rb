@@ -25,7 +25,7 @@ class TodosController < ApplicationController
   def create
 
     @todo = @list.todos.create(todo_params)
-
+    @user.todos << @todo
     respond_to do |format|
       if @todo.save
         format.html { redirect_to list_path(@list) }
