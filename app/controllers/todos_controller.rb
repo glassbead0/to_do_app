@@ -33,6 +33,9 @@ class TodosController < ApplicationController
 
     @todo = @list.todos.create(todo_params)
     @user.todos << @todo
+
+    set_deadline(@todo)
+
     respond_to do |format|
       if @todo.save
         format.html { redirect_to list_path(@list) }
@@ -41,6 +44,15 @@ class TodosController < ApplicationController
         format.html { render :new }
         format.json { render json: @todo.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  def set_deadline(todo)
+    if deadline = /\d+\sminutes/.match(todo.name)
+      minutes = /\d+/.match(deadline.to_s).to_s.to_i
+      todo.deadline = Time.new + minutes.minutes
+
+      todo.name.slice(deadline.to_s)
     end
   end
 
@@ -133,6 +145,6 @@ class TodosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def todo_params
-      params.require(:todo).permit(:name, :done)
+      params.require(:todo).permit(:name, :done, :deadline)
     end
 end
