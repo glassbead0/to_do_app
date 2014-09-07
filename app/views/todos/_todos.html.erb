@@ -1,6 +1,21 @@
 <ul class="list-group container">
   <% @todos.each do |todo| %>
-    <li class="list-group-item list-group-item-info col-sm-7">
+
+    <% urgency_color = 'info' %>
+    <% if todo.deadline %>
+      <% seconds_left = todo.deadline - Time.now %>
+      <% if seconds_left < 0 %>
+        <% urgency_color = 'overdue' %>
+      <% elsif seconds_left < 600 %>
+        <% urgency_color = 'danger' %>
+      <% elsif seconds_left < 3600 %>
+        <% urgency_color = 'warning' %>
+      <% else %>
+        <% urgency_color = 'info' %>
+      <% end %>
+    <% end %>
+
+    <li class="list-group-item list-group-item-<%= urgency_color %> col-sm-7">
       <%= link_to list_mark_done_path(@list, todo), method: :put do %>
         <button type="button" class="btn btn-primary btn-lg">
           <span class="glyphicon glyphicon-ok" style="font-size: 1.4em"></span>
@@ -9,10 +24,14 @@
       <%= link_to edit_list_todo_path(@list, todo), class: 'todo_font' do %>
         <%= todo.name %>
       <% end %>
+      <% if seconds_left %>
+        <%= (seconds_left/3600).round.to_s + ' hours' if seconds_left > 3600 %>
+        <%= (seconds_left/60).round.to_s + ' minutes' if seconds_left < 3600 && seconds_left > 0 %>
+        <%= 'OverDue!' if seconds_left < 0 %>
+      <% end %>
       <%= link_to list_todo_path(@list, todo), method: :delete do %>
         <span class="glyphicon glyphicon-remove-sign right_button"></span>
       <% end %>
-
 
     </li>
   <% end %>

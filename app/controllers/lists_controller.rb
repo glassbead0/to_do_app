@@ -18,7 +18,7 @@ class ListsController < ApplicationController
     # @todos = @q.result.where(done: false, list_id: @list.id)   # load all matching records
     # @dones = @q.result.where(done: true, list_id: @list.id)
 
-    @todos = @list.todos.where(done: false)
+    @todos = @list.todos.where(done: false).order(:deadline)
     @dones = @list.todos.where(done: true)
 
     if @dones.length + @todos.length != 0
@@ -29,6 +29,7 @@ class ListsController < ApplicationController
 
     @status = 'progress-bar progress-bar-success progress-bar-striped active' if @percentage == 100
     @status = 'progress-bar progress-bar-info progress-bar-striped active' if @percentage < 100
+
 
   end
 

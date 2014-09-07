@@ -46,3 +46,7 @@ html, body{
   left: 2px;
   top: 18px
 }
+
+.list-group-item-overdue {
+  background: #f9aeae;
+}
