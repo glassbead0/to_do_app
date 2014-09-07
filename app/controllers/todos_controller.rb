@@ -38,6 +38,7 @@ class TodosController < ApplicationController
 
     respond_to do |format|
       if @todo.save
+
         format.html { redirect_to list_path(@list) }
         format.json { render :show, status: :created, location: @list }
       else
@@ -48,7 +49,7 @@ class TodosController < ApplicationController
   end
 
   def set_deadline(todo)
-    name = todo.name
+    @name = todo.name
     if deadline = /\d+\sminutes/.match(todo.name)
       minutes = /\d+/.match(deadline.to_s).to_s.to_i
       todo.deadline = Time.new + minutes.minutes
@@ -57,13 +58,12 @@ class TodosController < ApplicationController
       todo.deadline = Time.new + hours.hours
     elsif deadline = /1 hour/.match(todo.name)
       todo.deadline = Time.new + 1.hour
-      todo.name.slice!('1 hour')
     else
       todo.deadline = Time.new + 24.hours
       deadline = ''
     end
-    name.slice!(deadline.to_s)
-    todo.update_attribute(:name, name)
+    @name.slice!(deadline.to_s)
+    todo.update_attribute(:name, @name)
     # WHY IS THIS NOT WORKING!!! IT IS NOT SLICING THE NAME
   end
 
