@@ -18,8 +18,10 @@ class ListsController < ApplicationController
     # @todos = @q.result.where(done: false, list_id: @list.id)   # load all matching records
     # @dones = @q.result.where(done: true, list_id: @list.id)
 
-    @todos = @list.todos.where(done: false).order(:deadline)
-    @dones = @list.todos.where(done: true)
+    @todos_with_deadline = @list.todos.where(done: false).where.not(deadline: nil).order(:deadline)
+    @todos_without_deadline = @list.todos.where(done: false, deadline: nil).order(:created_at)
+    @todos = @todos_with_deadline + @todos_without_deadline
+    @dones = @list.todos.where(done: true).order(:created_at)
 
     if @dones.length + @todos.length != 0
       @percentage = 100 * @dones.length / (@dones.length + @todos.length)
