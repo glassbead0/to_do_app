@@ -11,7 +11,7 @@ class TodosController < ApplicationController
 
   def index
     @q = @user.todos.search(params[:q])
-    @todos = @q.result.where(done: false).order(:list_id)   # load all matching records
+    @todos = @q.result.where(done: false).order(:deadline)   # load all matching records
     @dones = @q.result.where(done: true).order(:list_id)
   end
 
@@ -33,8 +33,12 @@ class TodosController < ApplicationController
 
     @todo = @list.todos.create(todo_params)
     @user.todos << @todo
+
+    set_deadline(@todo)
+
     respond_to do |format|
       if @todo.save
+
         format.html { redirect_to list_path(@list) }
         format.json { render :show, status: :created, location: @list }
       else
@@ -42,6 +46,24 @@ class TodosController < ApplicationController
         format.json { render json: @todo.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def set_deadline(todo)
+    name = todo.name
+    if deadline = /\d+\sminutes/.match(todo.name)
+      minutes = /\d+/.match(deadline.to_s).to_s.to_i
+      todo.deadline = Time.new + minutes.minutes
+    elsif deadline = /\d+\shours/.match(todo.name)
+      hours = /\d+/.match(deadline.to_s).to_s.to_i
+      todo.deadline = Time.new + hours.hours
+    elsif deadline = /1 hour/.match(todo.name)
+      todo.deadline = Time.new + 1.hour
+    else
+      todo.deadline = nil
+      deadline = ''
+    end
+    new_name = name.split(deadline.to_s).join
+    todo.update_attribute(:name, new_name)
   end
 
 
@@ -133,6 +155,6 @@ class TodosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def todo_params
-      params.require(:todo).permit(:name, :done)
+      params.require(:todo).permit(:name, :done, :deadline)
     end
 end
