@@ -50,15 +50,48 @@ class TodosController < ApplicationController
 
   def set_deadline(todo)
     name = todo.name
-    if deadline = /\d+\sminutes/.match(todo.name)
+    # get a statement in minutes or hours to make the deadline
+    if deadline = /(in\s)*\d+\s*minutes*/.match(todo.name)
       minutes = /\d+/.match(deadline.to_s).to_s.to_i
       todo.deadline = Time.new + minutes.minutes
-    elsif deadline = /\d+\shours/.match(todo.name)
+    elsif deadline = /(in\s)*\d+\s*hours*/.match(todo.name)
       hours = /\d+/.match(deadline.to_s).to_s.to_i
       todo.deadline = Time.new + hours.hours
-    elsif deadline = /1 hour/.match(todo.name)
-      todo.deadline = Time.new + 1.hour
-    else
+
+    # get a direct hour:minute time statement: 6:30pm
+    elsif deadline = /(at\s)*\d+:\d{2}\s*pm/.match(todo.name)
+      hour = (/\d+:/.match(deadline.to_s).to_s).delete(':').to_i + 12
+      hour = 12 if hour == 24
+      minute = (/:\d\d/.match(deadline.to_s).to_s).delete(':').to_i
+      todo.deadline = Time.new(Time.now.year, Time.now.month, Time.now.day, hour, minute)
+    elsif deadline = /(at\s)*\d+:\d{2}\s*am/.match(todo.name)
+      hour = (/\d+:/.match(deadline.to_s).to_s).delete(':').to_i
+      hour = 0 if hour == 12
+      # set day to tomorrow if deadline has already passed
+      day = Time.now.day
+      day = Time.now.day + 1 if hour <= Time.now.hour
+      minute = (/:\d\d/.match(deadline.to_s).to_s).delete(':').to_i
+      todo.deadline = Time.new(Time.now.year, Time.now.month, day, hour, minute)
+
+    # get an hour statement, 9pm
+    elsif deadline = /(at\s)*\d+\s*pm/.match(todo.name)
+      hour = /\d+/.match(deadline.to_s).to_s.to_i + 12
+      hour = 12 if hour == 24
+      todo.deadline = Time.new(Time.now.year, Time.now.month, Time.now.day, hour)
+    elsif deadline = /(at\s)*\d+\s*am/.match(todo.name)
+      hour =  /\d+/.match(deadline.to_s).to_s.to_i
+      hour = 0 if hour == 12
+      # set day to tomorrow if deadline has already passed
+      day = Time.now.day
+      day = Time.now.day + 1 if hour <= Time.now.hour
+      todo.deadline = Time.new(Time.now.year, Time.now.month, day, hour)
+
+    elsif deadline = /(at\s)*noon/.match(todo.name)
+      todo.deadline = Time.new(Time.now.year, Time.now.month, Time.now.day, 12)
+    elsif deadline = /(at\s*)midnight/.match(todo.name)
+      todo.deadline = Time.new(Time.now.year, Time.now.month, Time.now.day + 1)
+
+    else # no deadline
       todo.deadline = nil
       deadline = ''
     end
@@ -70,9 +103,16 @@ class TodosController < ApplicationController
   # PATCH/PUT /todos/1
   # PATCH/PUT /todos/1.json
   def update
-
     respond_to do |format|
       if @todo.update(todo_params)
+
+        # if blank, set deadline to nil
+        if @todo.deadline == '0001-01-01 00:00:00'
+          @todo.update_attribute(:deadline, nil)
+        end
+
+
+
         format.html { redirect_to @list }
         format.json { render :show, status: :ok, location: @todo }
       else

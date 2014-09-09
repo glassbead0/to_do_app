@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   devise_for :users, path_names: { sign_in: 'login', sign_out: 'logout' }, controllers: { omniauth_callbacks: 'users/omniauth_callbacks', registrations: 'users/registrations' }, omniauth_providers: [:facebook]
 
   get 'users' => 'users#todo_list'
+  get 'deadlines/info' => 'welcome#deadlines_info', as: 'deadlines_info'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

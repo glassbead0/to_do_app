@@ -13,10 +13,6 @@ class ListsController < ApplicationController
   # GET /lists/1.json
   def show
     @todo = @list.todos.new
-    # byebug
-    # @q = @list.todos.search(params[:q])
-    # @todos = @q.result.where(done: false, list_id: @list.id)   # load all matching records
-    # @dones = @q.result.where(done: true, list_id: @list.id)
 
     @todos_with_deadline = @list.todos.where(done: false).where.not(deadline: nil).order(:deadline)
     @todos_without_deadline = @list.todos.where(done: false, deadline: nil).order(:created_at)
@@ -29,9 +25,8 @@ class ListsController < ApplicationController
       @percentage = 0
     end
 
-    @status = 'progress-bar progress-bar-success progress-bar-striped active' if @percentage == 100
-    @status = 'progress-bar progress-bar-info progress-bar-striped active' if @percentage < 100
-
+    @status = 'success' if @percentage == 100
+    @status = 'info' if @percentage < 100
 
   end
 
