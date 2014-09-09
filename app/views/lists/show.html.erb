@@ -17,7 +17,7 @@
   <p>Congrats, you're done!</p>
 <% end %>
 <div class="progress">
-  <div class='<%= @status %>' role="progressbar"
+  <div class='progress-bar progress-bar-<%= @status %> progress-bar-striped active' role="progressbar"
        aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: <%= @percentage %>%">
     <span class="sr-only"></span><%= @percentage %>%
   </div>

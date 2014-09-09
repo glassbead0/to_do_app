@@ -4,4 +4,8 @@ class WelcomeController < ApplicationController
       redirect_to list_path(current_user.lists.find_by(name: 'Default'))
     end
   end
+
+  def deadlines_info
+
+  end
 end

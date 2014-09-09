@@ -88,6 +88,8 @@ class TodosController < ApplicationController
 
     elsif deadline = /(at\s)*noon/.match(todo.name)
       todo.deadline = Time.new(Time.now.year, Time.now.month, Time.now.day, 12)
+    elsif deadline = /(at\s*)midnight/.match(todo.name)
+      todo.deadline = Time.new(Time.now.year, Time.now.month, Time.now.day + 1)
 
     else # no deadline
       todo.deadline = nil

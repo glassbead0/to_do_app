@@ -50,3 +50,8 @@ html, body{
 .list-group-item-overdue {
   background: #f9aeae;
 }
+
+.deadline {
+  float: right;
+  color: #63aE15;
+}
