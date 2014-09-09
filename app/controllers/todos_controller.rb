@@ -89,7 +89,6 @@ class TodosController < ApplicationController
     elsif deadline = /(at\s)*noon/.match(todo.name)
       todo.deadline = Time.new(Time.now.year, Time.now.month, Time.now.day, 12)
 
-
     else # no deadline
       todo.deadline = nil
       deadline = ''
@@ -102,9 +101,16 @@ class TodosController < ApplicationController
   # PATCH/PUT /todos/1
   # PATCH/PUT /todos/1.json
   def update
-
     respond_to do |format|
       if @todo.update(todo_params)
+
+        # if blank, set deadline to nil
+        if @todo.deadline == '0001-01-01 00:00:00'
+          @todo.update_attribute(:deadline, nil)
+        end
+
+
+
         format.html { redirect_to @list }
         format.json { render :show, status: :ok, location: @todo }
       else

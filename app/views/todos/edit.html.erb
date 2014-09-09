@@ -9,9 +9,14 @@
 <%= form_for([@list, @todo], method: :put, :html => { :class => "form-horizontal" }) do |f| %>
 
   <div class="row">
-    <div class="col-sm-6">
+    <div class="col-sm-4">
       <%= f.text_field :name, :class => "form-control", autofocus: true, placeholder: 'New Item' %>
       <%= f.hidden_field :done, value: false, :class => "form-control" %>
+    </div>
+
+    <div class="col-sm-6">
+      <%= f.label :deadline, class: 'control-label'  %>
+      <%= f.time_select :deadline, ampm: true, minute_step: 5, include_blank: true, class: 'form-control' %>
     </div>
 
     <div class="col-sm-2">
